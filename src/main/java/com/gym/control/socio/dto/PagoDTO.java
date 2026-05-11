@@ -24,6 +24,9 @@ public class PagoDTO {
     //Relacion con socio (FK)
     private Integer socioId;
     
+    private Integer metodoPagoId;
+    
+    private String nombreMetodoPago;
     //Relacion con membresia (FK)
     //private String/Integer tipoMembresia/membresiaId;
 

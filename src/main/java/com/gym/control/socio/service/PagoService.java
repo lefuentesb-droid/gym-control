@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gym.control.socio.dto.PagoDTO;
+import com.gym.control.socio.model.MetodoPago;
 import com.gym.control.socio.model.Pago;
 import com.gym.control.socio.model.Socio;
+import com.gym.control.socio.repository.MetodoPagoRepository;
 import com.gym.control.socio.repository.PagoRepository;
 import com.gym.control.socio.repository.SocioRepository;
 
@@ -23,18 +25,35 @@ public class PagoService {
     @Autowired //lo mismo con el de arriba pero con el socio
     private SocioRepository socioRepository;
 
+    @Autowired
+    private MetodoPagoRepository metodoPagoRepository;
+
     //Obtener todos los pagos
     public List<PagoDTO> obtenerTodos() { //busca la lista de pagos y los convierte a DTO para que el usuario entienda mejor la informacion
         return pagoRepository.findAll().stream().map(this::convertirADTO).toList();
     }
 
     //Registrar pago
-    public PagoDTO registrarPago(Pago pago, Integer socioId) { //recibe un pago y el id del socio, busca el socio por su id, si no lo encuentra lanza una excepcion
+    public PagoDTO registrarPago(PagoDTO dto, Integer socioId) {
+
         Socio socio = socioRepository.findById(socioId)
-            .orElseThrow(() -> new RuntimeException("¡Socio no encontrado!"));
+                .orElseThrow(() -> new RuntimeException("Socio no encontrado"));
+
+        MetodoPago metodoPago = metodoPagoRepository.findById(dto.getMetodoPagoId())
+                .orElseThrow(() -> new RuntimeException("Método de pago no encontrado"));
+
+        Pago pago = new Pago();
+
         pago.setSocio(socio);
-        pago.setEstado(true); // Se crea como activo por defecto
-        return convertirADTO(pagoRepository.save(pago));
+        pago.setMetodoPago(metodoPago);
+        pago.setMonto(dto.getMonto());
+        pago.setFechaPago(dto.getFechaPago());
+        pago.setComprobante(dto.getComprobante());
+        pago.setEstado(dto.getEstado());
+
+        Pago guardado = pagoRepository.save(pago);
+
+        return convertirADTO(guardado);
     }
 
     //               ACTUALIZAR PAGO
@@ -56,6 +75,10 @@ public class PagoService {
         dto.setComprobante(pago.getComprobante());
         dto.setEstado(pago.getEstado());
         dto.setSocioId(pago.getSocio().getId());
+        if (pago.getMetodoPago() != null) {
+            dto.setMetodoPagoId(pago.getMetodoPago().getIdMetodoPago());
+            dto.setNombreMetodoPago(pago.getMetodoPago().getNombre());
+        }
         //dto.setMembresiaId(pago.getMembresia().getId());
         //dto.setMetodoPagoId(pago.getMetodoPago().getId());
         return dto;

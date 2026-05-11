@@ -63,6 +63,7 @@ public class Pago {
     @JoinColumn(name = "socio_id", nullable = false)
     private Socio socio;
 
+    
     //Relacion con membresia (FK)
     //@ManyToOne(fetch = FetchType.LAZY)
     //@JoinColumn(name = "membresia_id", nullable = false)

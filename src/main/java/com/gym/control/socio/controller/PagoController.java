@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gym.control.socio.dto.PagoDTO;
-import com.gym.control.socio.model.Pago;
+
 import com.gym.control.socio.service.PagoService;
 
 import jakarta.validation.Valid;
@@ -32,10 +32,10 @@ public class PagoController {
         return new ResponseEntity<>(pagos, HttpStatus.OK);
     }
 
-    @PostMapping("/socio/{socioId}") // Recibe un pago nuevo y lo asocia al Id del socio, si falla devuelve un bad request
-    public ResponseEntity<PagoDTO> crearPago(@Valid @RequestBody Pago pago, @PathVariable Integer socioId) {
+    @PostMapping("/socio/{socioId}")
+    public ResponseEntity<PagoDTO> crearPago(@Valid @RequestBody PagoDTO dto, @PathVariable Integer socioId) {
         try {
-            return new ResponseEntity<>(pagoService.registrarPago(pago, socioId), HttpStatus.CREATED);   
+            return new ResponseEntity<>(pagoService.registrarPago(dto, socioId), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
