@@ -32,7 +32,7 @@ public class PagoController {
         return new ResponseEntity<>(pagos, HttpStatus.OK);
     }
 
-    @PostMapping("/socio/{socioId}")
+    @PostMapping("/socio/{socioId}")// Recibe un pago nuevo y lo asocia al Id del socio, si falla devuelve un bad request
     public ResponseEntity<PagoDTO> crearPago(@Valid @RequestBody PagoDTO dto, @PathVariable Integer socioId) {
         try {
             return new ResponseEntity<>(pagoService.registrarPago(dto, socioId), HttpStatus.CREATED);

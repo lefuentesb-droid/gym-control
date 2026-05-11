@@ -56,16 +56,7 @@ public class PagoService {
         return convertirADTO(guardado);
     }
 
-    //               ACTUALIZAR PAGO
-    //public Pago actualizarPago(Integer id, Pago datosNuevos) {
-        //Pago existente = pagoRepository.findById(id)
-            //.orElseThrow(() -> new RuntimeException("¡Pago no encontrado!"));
-        //if (datosNuevos.getMonto() != null) existente.setMonto(datosNuevos.getMonto());
-        //if (datosNuevos.getComprobante() != null) existente.setComprobante(datosNuevos.getComprobante());
-        //if (datosNuevos.getEstado() != null) existente.setEstado(datosNuevos.getEstado());
-        
-        //return pagoRepository.save(existente);
-   //}
+    
 
     private PagoDTO convertirADTO(Pago pago) { //convierte un pago a un DTO para que el usuario entienda mejor la informacion
         PagoDTO dto = new PagoDTO();
@@ -79,8 +70,6 @@ public class PagoService {
             dto.setMetodoPagoId(pago.getMetodoPago().getIdMetodoPago());
             dto.setNombreMetodoPago(pago.getMetodoPago().getNombre());
         }
-        //dto.setMembresiaId(pago.getMembresia().getId());
-        //dto.setMetodoPagoId(pago.getMetodoPago().getId());
         return dto;
     }
 }

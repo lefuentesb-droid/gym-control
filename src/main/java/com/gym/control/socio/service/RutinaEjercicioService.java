@@ -53,12 +53,6 @@ public class RutinaEjercicioService {
         dto.setDescansoSegundos(rutina.getDescansoSegundos());
         dto.setOrden(rutina.getOrden());
         dto.setObservaciones(rutina.getObservaciones());
-        
-        //               ESPERAR ENTIDAD RUTINA PARA COMPLETAR ESTO
-        //if (rutina.getRutina() != null) {
-            //dto.setRutinaId(rutina.getRutina().getId());
-        //}
-
         if (rutina.getEjercicio() != null) {
             dto.setEjercicioId(rutina.getEjercicio().getId());
         }

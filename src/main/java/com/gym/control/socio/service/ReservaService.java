@@ -75,7 +75,6 @@ public class ReservaService {
         dto.setFechaReserva(reserva.getFechaReserva());
         dto.setEstado(reserva.getEstado());
         dto.setSocioId(reserva.getSocio().getId());
-        // dto.setNombreSocio(reserva.getSocio().getNombre());
         return dto;
     }
 }

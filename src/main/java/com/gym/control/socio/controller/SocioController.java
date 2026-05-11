@@ -44,7 +44,6 @@ public class SocioController {
             SocioDTO soci = socioService.buscarPorId(id);
             return new ResponseEntity<>(soci, HttpStatus.OK);
         } catch (RuntimeException e) {
-            // Si el service lanza la excepción del "socio no existe"
             return ResponseEntity.notFound().build();
         }
     }
@@ -61,7 +60,7 @@ public class SocioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SocioDTO> actualizarSocio(@PathVariable Integer id, @RequestBody Socio soci){//Para no exponer directamente la entidad y mantener separación entre la capa de persistencia y la capa de presentación.
+    public ResponseEntity<SocioDTO> actualizarSocio(@PathVariable Integer id, @RequestBody Socio soci){
         try{
                 Socio newSoci = socioService.actualizarSocio(id, soci);
                 SocioDTO dto = socioService.buscarPorId(newSoci.getId());

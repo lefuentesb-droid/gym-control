@@ -8,4 +8,5 @@ import com.gym.control.socio.model.Ejercicio;
 @Repository
 public interface EjercicioRepository extends JpaRepository<Ejercicio, Integer> {
     List<Ejercicio> findByEstado(Boolean estado);
+    
 }

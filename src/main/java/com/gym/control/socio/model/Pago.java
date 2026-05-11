@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,10 +40,9 @@ public class Pago {
     private LocalDate fechaPago;
 
     //Metodo de pago 
-    
     @ManyToOne
     @JoinColumn(name = "id_metodo_pago", nullable = false)
-    private MetodoPago metodoPago;
+    private MetodoPago metodoPago;//Relacion con socio (FK)
 
     //Comprobante del pago
     @NotBlank(message = "El número de comprobante es obligatorio")
@@ -57,20 +55,11 @@ public class Pago {
     @Column(nullable = false)
     private Boolean estado;
 
-    //Relacion con socio (FK)
-    @ManyToOne(fetch = FetchType.LAZY)  //ManyToOne por que muchos pagos pueden pertenecer a un socio ????????????????????????????????????????????????????????????????????????
-    //???????????????????????????????????
+    
+    @ManyToOne 
     @JoinColumn(name = "socio_id", nullable = false)
     private Socio socio;
 
     
-    //Relacion con membresia (FK)
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "membresia_id", nullable = false)
-    //private Membresia membresia;
-
-    //Relacion con metodo_pago (FK)
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@joinColumn(name = "id_metodo_pago", nullable = false)
-    //private MetodoPago metodoPago;
+   
 }
