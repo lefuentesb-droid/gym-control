@@ -37,11 +37,6 @@ public class RutinaEjercicio {
     @Column(length = 255)
     private String observaciones;
 
-    //               ESPERAR ENTIDAD RUTINA PARA COMPLETAR ESTO
-    //Relación con rutina (FK)
-    //@ManyToOne
-    //@JoinColumn(name = "id_rutina")
-    //private Rutina rutina;
 
     //Relacion con ejercicio (FK)
     @ManyToOne
